@@ -8,6 +8,7 @@
 <div class="category">
 
     <h3 class="page-title">@ViewBag.Title</h3>
+    <a href="/" class="btn btn-light mr-2 continueBtn" style="border: 1px solid #CED4DA;"> <span style="color:black;" class="fas fa-arrow-alt-left"></span> Inicio </a>
 
     @foreach (var c in items.OrderBy(x=>x.Position).Select(x => x.Subcategory).Distinct())
     {

@@ -39,7 +39,7 @@ namespace BotonesRelease.Controllers
             return View(i);
         }
 
-        public ActionResult Cart()
+        public ActionResult Favorites()
         {
             Cart c = new Cart();
             if (Session["Cart"] != null)
@@ -89,7 +89,8 @@ namespace BotonesRelease.Controllers
             return Json(new { }); 
         }
 
-        public ActionResult DeleteItemFromCart(int id)
+        [HttpPost]
+        public JsonResult DeleteItemFromCart(int id)
         {            
             Cart c = Session["Cart"] as Cart;
             if (c != null)
@@ -101,16 +102,17 @@ namespace BotonesRelease.Controllers
             {
                 Session["Cart"] = new Cart();
             }
-            return RedirectToAction("Cart","Home");
+
+            return Json(new { });
         }
 
         [HttpPost]
-        public ActionResult ChangeQuantity(int id, int qty)
+        public JsonResult ChangeQuantity(int id, int qty)
         {
             Cart c = Session["Cart"] as Cart;
             c.ItemList.FindAll(x => x.ID == id).FirstOrDefault().QtyInCart = qty;
             Session["Cart"] = c;
-            return RedirectToAction("Cart", "Home");
+            return Json(new { });
         }
 
         public ActionResult Category(string category)
