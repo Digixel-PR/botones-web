@@ -24,6 +24,18 @@ namespace BotonesRelease.Controllers
 
             Item i = new Item();
             i = i.Get(id);
+
+            Cart c = new Cart();
+            if (Session["Cart"] != null)
+            {
+                c = Session["Cart"] as Cart;
+                ViewBag.InCart = c.ItemList.Exists(x => x.ID == id) ? "true" : "false";
+            }
+            else
+            {
+                ViewBag.InCart = "false";
+            }
+
             return View(i);
         }
 
@@ -74,14 +86,21 @@ namespace BotonesRelease.Controllers
             }
 
             Session["Cart"] = c;
-            return RedirectToAction("Cart","Home");
+            return Json(new { }); 
         }
 
         public ActionResult DeleteItemFromCart(int id)
         {            
             Cart c = Session["Cart"] as Cart;
-            c.ItemList.RemoveAll(x => x.ID == id);
-            Session["Cart"] = c;
+            if (c != null)
+            {
+                c.ItemList.RemoveAll(x => x.ID == id);
+                Session["Cart"] = c;
+            }
+            else
+            {
+                Session["Cart"] = new Cart();
+            }
             return RedirectToAction("Cart","Home");
         }
 
@@ -138,7 +157,8 @@ namespace BotonesRelease.Controllers
             //m.Add();
             //ViewBag.Message = "Su orden ha sido recibida exitosamente, nos comunicaremos con usted de necesitar más información para procesar la orden.";
             ////ViewBag.Message = "Your order was received successfully, we will contact you if more information is needed to process the order.";
-            return Redirect();
+            //return Redirect();
+            return View();
         }
 
 
