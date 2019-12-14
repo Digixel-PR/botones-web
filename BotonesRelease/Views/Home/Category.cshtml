@@ -1,0 +1,36 @@
+﻿@using BotonesRelease.Models
+@{
+    List<Item> items = new Item().GetList().Where(x => x.Category == ViewBag.Category).ToList();
+    ViewBag.Title = items.FirstOrDefault().Category;
+}
+<br />
+
+<div class="category">
+
+    <h3 class="page-title">@ViewBag.Title</h3>
+
+    @foreach (var c in items.OrderBy(x=>x.Position).Select(x => x.Subcategory).Distinct())
+    {
+        <div style="margin-bottom: 30px;">
+            <div class="page-slide-title"> @c </div>
+
+            <div class="mobile-slide">
+                <div class="d-flex subcategoryBox">
+
+                    @foreach (Item i in items.Where(x => x.Subcategory.Trim() == c).OrderBy(x => x.Name))
+                    {
+                        <a class="item" href="/Home/Product/@i.ID">
+                            <img src="~/Images/@i.PictureUrl" />
+                            <div class="title">@i.Name</div>
+                            <div class="model">(#@i.ID.ToString("0000#"))</div>
+                            @*<div class="price">@i.Price.Value.ToString("c2")</div>*@
+                        </a>
+                    }
+                </div>
+
+            </div>
+        </div>
+    }
+
+
+</div>

@@ -1,0 +1,120 @@
+﻿@using BotonesRelease.Models
+@{
+    ViewBag.Title = "Home Page";
+    List<Item> items = new Item().GetList();
+}
+
+
+<div class="page-banner">
+
+</div>
+
+<br />
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <h5 class="text-center" style="color: #4B961E; border: 1px solid #4B961E; padding: 12px 10px; border-radius: 20px;"> 
+        @ViewBag.Message 
+    </h5>
+}
+
+<div class="slide-title"> Chains </div>
+<div class="islide">
+    <div style="overflow: auto;">
+        <div class="d-flex">
+
+            @foreach (Item i in items.Where(x => x.Category.Trim() == "Chains"))
+            {
+                <a class="item" href="/Home/Product/@i.ID">
+                    <img src="~/Images/@i.PictureUrl" />
+                    <div class="title">@i.Name</div>
+                    <div class="model">(#@i.ID.ToString("0000#"))</div>
+                    @*<div class="price">@i.Price.Value.ToString("c2")</div>*@
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    /*.nice-image:first-child, .nice-image:last-child {
+        padding: 15px 0;
+    }*/
+    .nice-image {
+        max-width: 300px;
+        min-width: 30%;
+        margin-top: 0px;
+        margin-top: 0px;
+        padding: 15px;
+        border: 1px solid #cecece;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+        .nice-image img {
+            width: 100%;
+            height: 90%;
+        }
+</style>
+
+<div class="d-flex flex-wrap justify-content-around" style="margin:20px;">
+    <div class="nice-image">
+        <img src="~/Images/multi-a.jpg" />
+    </div>
+    <div class="nice-image">
+        <img src="~/Images/multi-b.jpg" />
+    </div>
+    <div class="nice-image">
+        <img src="~/Images/multi-c.jpg" />
+    </div>
+</div>
+
+
+
+<div class="slide-title"> Bracelets </div>
+<div class="islide">
+    <div style="overflow: auto;">
+        <div class="d-flex">
+
+            @foreach (Item i in items.Where(x => x.Category.Trim() == "Bracelets"))
+            {
+                <a class="item" href="/Home/Product/@i.ID">
+                    <img src="~/Images/@i.PictureUrl" />
+                    <div class="title">@i.Name</div>
+                    <div class="model">(#@i.ID.ToString("0000#"))</div>
+                    @*<div class="price">@i.Price.Value.ToString("c2")</div>*@
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<br />
+
+
+
+
+
+<div class="slide-title"> Buttons </div>
+<div class="islide" id="ContactForm">
+    <div style="overflow: auto;">
+        <div class="d-flex">
+
+            @foreach (Item i in items.Where(x => x.Category.Trim() == "Buttons"))
+            {
+                <a class="item" href="/Home/Product/@i.ID">
+                    <img src="~/Images/@i.PictureUrl" />
+                    <div class="title">@i.Name</div>
+                    <div class="model">(#@i.ID.ToString("0000#"))</div>                    
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+
+

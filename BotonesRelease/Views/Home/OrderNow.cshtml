@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "Hacer una Orden";
+}
+
+<style>
+    .form-group {
+        margin-right: 10px;
+    }
+</style>
+
+<div class="mt-5 p-4" style="background-color: #DDD; border: 1px solid #CECECE; border-radius: 10px;">
+    <div>
+        @*<h5>Use this form to contact us:</h5>*@
+        <h5>Usa este formulario para hacer una orden:</h5>
+        <br />
+    </div>
+    @using (Html.BeginForm("SubmitOrder", "Home", FormMethod.Post, new { @class = "orderForm" }))
+    {
+<div class="d-flex flex-wrap justify-content-start">
+    <div class="form-group">
+        <label>Nombre Completo</label>
+        <input type="text" name="Name" class="form-control" style="min-width: 250px; width: 100%;" />
+    </div>
+    <div class="form-group">
+        <label>Teléfono</label>
+        <input type="tel" name="Phone" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="Email" class="form-control" style="min-width: 250px; width: 100%;" />
+    </div>
+    <div class="form-group" style="width: 100%;">
+        <label class="lbl">Dirección Postal</label>
+        <textarea rows="2" name="PostalAddress" class="form-control" style="width: 100%; max-width: 100%;"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Ciudad</label>
+        <input type="text" name="City" class="form-control" style="min-width: 250px; width: 100%;" />
+    </div>
+
+    <div class="form-group">
+        <label>País/Estado</label>
+        <select class="form-control state" name="State" style="width: 100%;">
+            <option value="PR">PR - Puerto Rico</option>
+            <option value="AL">AL - Alabama</option>
+            <option value="AK">AK - Alaska</option>
+            <option value="AZ">AZ - Arizona</option>
+            <option value="AR">AR - Arkansas</option>
+            <option value="CA">CA - California</option>
+            <option value="CO">CO - Colorado</option>
+            <option value="CT">CT - Connecticut</option>
+            <option value="DE">DE - Delaware</option>
+            <option value="DC">DC - District Of Columbia</option>
+            <option value="FL">FL - Florida</option>
+            <option value="GA">GA - Georgia</option>
+            <option value="HI">HI - Hawaii</option>
+            <option value="ID">ID - Idaho</option>
+            <option value="IL">IL - Illinois</option>
+            <option value="IN">IN - Indiana</option>
+            <option value="IA">IA - Iowa</option>
+            <option value="KS">KS - Kansas</option>
+            <option value="KY">KY - Kentucky</option>
+            <option value="LA">LA - Louisiana</option>
+            <option value="ME">ME - Maine</option>
+            <option value="MD">MD - Maryland</option>
+            <option value="MA">MA - Massachusetts</option>
+            <option value="MI">MI - Michigan</option>
+            <option value="MN">MN - Minnesota</option>
+            <option value="MS">MS - Mississippi</option>
+            <option value="MO">MO - Missouri</option>
+            <option value="MT">MT - Montana</option>
+            <option value="NE">NE - Nebraska</option>
+            <option value="NV">NV - Nevada</option>
+            <option value="NH">NH - New Hampshire</option>
+            <option value="NJ">NJ - New Jersey</option>
+            <option value="NM">NM - New Mexico</option>
+            <option value="NY">NY - New York</option>
+            <option value="NC">NC - North Carolina</option>
+            <option value="ND">ND - North Dakota</option>
+            <option value="OH">OH - Ohio</option>
+            <option value="OK">OK - Oklahoma</option>
+            <option value="OR">OR - Oregon</option>
+            <option value="PA">PA - Pennsylvania</option>
+            <option value="RI">RI - Rhode Island</option>
+            <option value="SC">SC - South Carolina</option>
+            <option value="SD">SD - South Dakota</option>
+            <option value="TN">TN - Tennessee</option>
+            <option value="TX">TX - Texas</option>
+            <option value="UT">UT - Utah</option>
+            <option value="VT">VT - Vermont</option>
+            <option value="VA">VA - Virginia</option>
+            <option value="WA">WA - Washington</option>
+            <option value="WV">WV - West Virginia</option>
+            <option value="WI">WI - Wisconsin</option>
+            <option value="WY">WY - Wyoming</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Zipcode</label>
+        <input type="text" name="Zipcode" class="form-control" style="width: 110px;" />
+    </div>
+
+    <div class="form-group" style="width: 100%;">
+        <label class="lbl"> Instrucciones Especiales (Opcional)</label>
+        <textarea rows="4" name="Message" class="form-control message" style="width: 100%; max-width: 100%;">*</textarea>
+    </div>
+
+</div>
+<div>
+    <div class="form-group">
+        <label>Lenguage de Preferencia para Comunicados</label>
+        <select class="form-control mainLanguage" name="PreferredLanguage">
+            <option value="Español">Español</option>
+            <option value="English">English</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Método de Pago</label>
+        <select class="form-control paymentMethod" name="PaymentMethod">
+            <option value="ATH Móvil">ATH Móvil</option>
+            <option value="PayPal">PayPal</option>
+            <option value="dinero en efectivo">En Efectivo / En Persona </option>
+        </select>
+        <br />
+        <b class="athimage">Pagar a:</b><br />
+        <img src="~/Graphics/path.png" class="btn mb-3 athimage" style="width: 175px; border: none; padding-left: 0px;" />
+
+    </div>
+
+
+    <h5 class="mr-auto" style="font-size: 0.8em;">
+        Al hacer click en Enviar Orden, certifico que la dirección es la correcta y me comprometo a hacer el pago una vez envíe la orden.
+        Entiendo que la orden sólo se procesará y se enviará si la misma es pagada utilizando <span class="method">ATH Móvil</span> como método de pago.
+        Si necesita que nos comuniquemos con usted, favor de dejar tu número de teléfono y dejar un mensaje en el encasillado de Instrucciones Especiales arriba en el formulario.
+    </h5>
+    <br />
+    <button type="button" class="btn mr-auto submitOrderBtn" style="background-color: #6D6D6D; color: white;"> Enviar Orden </button>
+</div>
+    }
+</div>
+
+
+
+
+<script>
+
+    $('.paymentMethod').change(function () {
+        $('.method').text($(this).val());
+
+        if ($(this).val() == "ATH Móvil") {
+            $('.athimage').show();
+        }
+        else {
+            $('.athimage').hide();
+        }
+    });
+
+    $('.submitOrderBtn').click(function () {
+
+        var n = 0;
+
+        if ($('.message').val().trim() == "") {
+            $('.message').val("*")
+        }
+
+        $('.form-control').each(function (x, i) {
+            $(i).css('background-color', 'white');
+            if ($(i).val().trim() == "") {
+                n = n + 1;
+                $(i).css('background-color', '#FFCCCC');
+            }
+        });
+
+        if (n == 0) {
+            $('.orderForm').submit();
+        }
+    });
+
+</script>

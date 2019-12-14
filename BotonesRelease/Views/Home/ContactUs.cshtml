@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "Contáctanos";
+}
+
+<div class="mt-5 p-4" style="background-color: #B3CE85; border: 1px solid #CECECE; border-radius: 10px;">
+    <div>
+        @*<h5>Use this form to contact us:</h5>*@
+        <h5>Usa este formulario para contactarnos:</h5>
+        <br />
+    </div>
+    @using (Html.BeginForm("SubmitContact", "Home", FormMethod.Post, new { @class = "contactForm" }))
+    {
+        <div class="d-flex flex-wrap justify-content-between">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input type="tel" name="Phone" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Color Favorito</label>
+                <select class="form-control" name="FavoriteColor">
+                    <option value="Ninguno">-- Selecciona --</option>
+                    <option value="Rojo">Rojo</option>
+                    <option value="Verde">Verde</option>
+                    <option value="Azul">Azul</option>
+                    <option value="Amarillo">Amarillo</option>
+                    <option value="Anaranjado">Anaranjado</option>
+                    <option value="Rosa">Rosa</option>
+                    <option value="Plateado">Plateado</option>
+                    <option value="Dorado">Dorado</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Propósito</label>
+                <select class="form-control purpose" name="Purpose">
+                    <option value="Dejar Comentario">Dejar Comentario</option>
+                    <option value="Solicitar un Artículo">Solicitar un Artículo</option>
+                    <option value="Pregunta">Pregunta</option>
+                    <option value="Otro">Otro Tema</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="width: 100%;">
+                <label class="lbl">Mensaje</label>
+                <textarea rows="4" name="Message" class="form-control" style="width: 100%; max-width: 100%;"></textarea>
+            </div>
+
+            <script>
+                $('.purpose').change(function () {
+                    if ($(this).val() == "Order an Item") {
+                        $('.lbl').text("Item #");
+                    }
+                    else {
+                        $('.lbl').text("Message");
+                    }
+
+                });
+            </script>
+
+
+        </div>
+        <div>
+            <div class="form-group">
+                <label>Lenguage de Preferencia para Comunicados</label>
+                <select class="form-control purpose" name="Purpose">
+                    <option value="Español">Español</option>
+                    <option value="English">English</option>
+                </select>
+            </div>
+
+
+            <h5 class="mr-auto" style="font-size: 0.8em;">
+                Haz click en Enviar y nos comunicaremos contigo lo antes posible.
+                @*Click "Submit" and we will contact you as soon as possible.*@
+            </h5>
+
+            <button type="button" class="btn mr-auto submitBtn" style="background-color: #6D6D6D; color: white;"> Enviar </button>
+        </div>
+    }
+</div>
+
+
+
+
+<script>
+    $('.submitBtn').click(function () {
+
+        var n = 0;
+        $('.form-control').each(function (x,i) {
+            $(i).css('background-color', 'white');
+            if ($(i).val().trim() == "") {
+                n = n + 1;
+                $(i).css('background-color', '#FFCCCC');
+            }
+        });
+
+        if (n == 0) {
+            $('.contactForm').submit();
+        }
+    });
+
+</script>

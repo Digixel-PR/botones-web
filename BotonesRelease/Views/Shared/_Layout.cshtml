@@ -1,0 +1,172 @@
+﻿@using System.Configuration
+@using BotonesRelease.Models
+@{
+    Cart cart = Session["Cart"] as Cart;
+    List<Item> items = new Item().GetList();
+
+    if (cart == null)
+    {
+        cart = new Cart();        
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Los botones están de moda, Joyería Intercambiable, Snap Buttons Puerto Rico, Joyería Divertida" />
+    <title>@ViewBag.Title - Botones | Los botones están de moda, Joyería Intercambiable, Snap Buttons Puerto Rico, Joyería Divertida </title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @if (ConfigurationManager.AppSettings["Debug"].ToString() == "false")
+    {
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151750938-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-151750938-1');
+        </script>
+    }
+
+    <style>
+        .nav-item {
+            min-width: 95px;
+            text-align: right;
+        }
+    </style>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg container d-flex justify-content-between navbar-light fixed-top" style="background-color: white; ">
+
+        <div class="d-flex justify-content-between" style="align-items: center; width: 100%;">
+            <a class="navbar-brand" href="/">
+                <img src="~/Images/logo.png" style="height: 60px;" />
+            </a>
+
+            <div class="d-flex">
+
+                @*<div class="mr-2 theBasketIcon" style="cursor: pointer!important;">
+                        <a href="/Home/Cart">
+                            <span class="itemsInCart">@cart.ItemList.Sum(x=>x.QtyInCart)</span>
+                            <span class="far fa-shopping-basket" style="font-size: 1.3em; margin-top:7px;"></span> <span class="cartCount"></span>
+                        </a>
+                    </div>*@
+                <div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">
+                        Inicio
+                    </a>
+                </li>
+                @*<li class="nav-item">
+            <a class="nav-link viewCartMenu" href="#">Cart</a>
+        </li>*@
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                        Categorías
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        @foreach (var c in items.Select(x => x.Category).Distinct())
+                        {
+                            <a class="dropdown-item" href="/Home/Category?category=@c"> @c </a>
+                        }
+
+                        @*<a class="dropdown-item" href="/Home/Category?category=Chains"> Chains </a>
+                <a class="dropdown-item" href="/Home/Category?category=Bracelets"> Bracelets </a>
+                <a class="dropdown-item" href="/Home/Category?category=Buttons"> Buttons </a>*@
+                        @*<div class="dropdown-divider"></div>*@
+                    </div>
+                </li>
+                @*<li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+        </li>*@
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="/Home/ContactUs">
+                        Contáctanos
+                    </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="/Home/OrderNow">
+                        Ordenar
+                    </a>
+                </li>
+            </ul>
+            @*<form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>*@
+        </div>
+
+    </nav>
+
+    <style>
+        footer {
+            /*background-color: #212121;
+            color: white;*/
+            padding: 40px;
+            margin: 0;
+            text-align: center;
+        }
+    </style>
+
+    <div class="container body-content" style="margin-top: 36px;">
+        @RenderBody()
+        <hr />
+        <footer>
+            <a href="/"><img src="~/Images/logo.png" style="height: 60px;" /></a>
+            <p>&copy; @DateTime.Now.Year - Botones | Joyería Intercambiable y Divertida.</p>
+
+            <div class="mt-4 text-center" style="width: 100%; text-align: center;">
+                <a target="_blank" href="fb://page/?id=2173423389615397" class="btn mb-3 d-md-none" style="width: 175px; border: 1px solid #CED4DA;">
+                    <span class="fab fa-facebook-f" style="color: #4267B2;"></span> Facebook
+                </a>
+                <!-- Web -->
+                <a target="_blank" href="https://www.facebook.com/losbotonesestandemoda/" class="d-none d-md-inline-block btn mb-3" style="width: 175px; border: 1px solid #CED4DA;">
+                    <span class="fab fa-facebook-f" style="color: #4267B2;"></span> Facebook
+                </a>
+                <a target="_blank" href="https://www.instagram.com/losbotonesestandemoda/" class="btn mb-3" style="width: 175px; border: 1px solid #CED4DA;">
+                    <span class="fab fa-instagram" style="color: #7A3CBD;"></span> Instagram
+                </a>
+
+
+            </div>
+
+            <img src="~/Graphics/path.png" class="btn mb-3" style="width: 175px; border: 1px solid #CED4DA;" />
+
+        </footer>
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+
+    <script>
+        $('#toggle').click(function () {
+            $(this).toggleClass('active');
+            $('#overlay').toggleClass('open');
+        });
+    </script>
+
+</body>
+</html>
